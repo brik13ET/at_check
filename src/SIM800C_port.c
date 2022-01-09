@@ -9,15 +9,24 @@
 #include <SIM800C.h>
 #include "main.h"
 
+uint8_t need_eol = 1;
+
 void __SIM800C_USER_UartTX(uint8_t* data, uint8_t lth)
 {
-	printf("> ");
+	if (need_eol)
+	{
+		need_eol = 0;
+		printf(">");
+	}
 	for (int i = 0; i < lth; ++i)
 	{
-		if (isprint(data[i]) || data[i] == '\r' || data[i] == '\n')
-			printf("%c", data[i]);
-		else
-			printf(" %02xh", data[i]);
+		if (!isprint(data[i]) && !isspace(data[i]) )
+			printf("%02xh", data[i]);
+		printf("%c", data[i]);
+
+		if (data[i] == '\n')
+			need_eol = 1;
+
 	}
 }
 
