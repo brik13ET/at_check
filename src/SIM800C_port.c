@@ -32,7 +32,11 @@ void __SIM800C_USER_UartTX(uint8_t* data, uint8_t lth)
 
 uint8_t __SIM800C_USER_UartRX(uint8_t* data, uint16_t lth, uint32_t timeout)
 {
-	printf("< ");
+	if (need_eol)
+	{
+		need_eol = 0;
+		printf("\n<");
+	}
 	if (lth > 2)
 		scanf("%.*s", lth-2, data);
 	else

@@ -66,5 +66,22 @@ uint8_t SIM800C_SendSMS(uint8_t* data, uint16_t length, uint8_t num[12], uint32_
 	__SIM800C_USER_UartTX(data, length);
 	__SIM800C_USER_UartTX(template[2], strlen(template[2]));
 
-	return SIM800C_OK;
+	// get message reference from answer
+
+	char resp[16];
+	__SIM800C_USER_UartRX(&resp[0], 15, 100);
+	resp[15] = 0;
+	if (resp[3] == 'S') // +CMS ERROR: <err>
+	{
+		return SIM800C_ERROR;
+	}
+
+	char mr_str[4];
+	uint8_t i = 6;
+	while (i < 15 && resp[i] != '\r' && resp[i] != '\n')
+		 ++i;
+	memcpy(&mr_str[0], &resp[6], i - 6);
+	mr_str[3] = 0;
+	uint8_t mr = atoi(&mr_str[0]);
+	return mr;
 }

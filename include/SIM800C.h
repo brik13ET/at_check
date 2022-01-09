@@ -2,16 +2,18 @@
 #define SIM800C_SIM800C_H_
 
 #include <stdint.h>
-
+#include <stdlib.h>
 
 extern struct SIM800* current;
 
 uint8_t SIM800C_Init();
+
+
 uint8_t SIM800C_SendSMS
 (
 		uint8_t* data,
 		uint16_t length,
-		uint8_t num[11],
+		uint8_t num[12], // Ex: "+78005553535"
 		uint32_t timeout
 );
 
