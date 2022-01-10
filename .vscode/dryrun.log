@@ -1,0 +1,13 @@
+"D:\mingw\mingw64\bin\mingw32-make.exe" --dry-run --keep-going --print-directory
+mingw32-make: Entering directory 'd:/Git/at_check'
+gcc -c -Iinclude src/main.c -o build/main.c.o
+ 
+gcc -c -Iinclude src/SIM800C.c -o build/SIM800C.c.o
+ 
+gcc -c -Iinclude src/SIM800C_port.c -o build/SIM800C_port.c.o
+ 
+echo FILES src/main.c src/SIM800C.c src/SIM800C_port.c
+ 
+gcc  build/SIM800C_port.c.o build/main.c.o build/SIM800C.c.o -o result.exe
+mingw32-make: Leaving directory 'd:/Git/at_check'
+ 

@@ -2,6 +2,7 @@
 #include "SIM800C_port.h"
 #include <string.h>
 
+#define debug_str(x) printf("%s: %s\n", #x, x)
 
 uint8_t strequ(char* s1, char* s2)
 {
@@ -80,8 +81,9 @@ uint8_t SIM800C_SendSMS(uint8_t* data, uint16_t length, uint8_t num[12], uint32_
 	uint8_t i = 6;
 	while (i < 15 && resp[i] != '\r' && resp[i] != '\n')
 		 ++i;
-	memcpy(&mr_str[0], &resp[6], i - 6);
+	memcpy(&mr_str[0], &resp[7], i - 6);
 	mr_str[3] = 0;
+
 	uint8_t mr = atoi(&mr_str[0]);
 	return mr;
 }

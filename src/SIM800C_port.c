@@ -20,9 +20,9 @@ void __SIM800C_USER_UartTX(uint8_t* data, uint8_t lth)
 	}
 	for (int i = 0; i < lth; ++i)
 	{
-		if (!isprint(data[i]) && !isspace(data[i]) )
+		if (!(isprint(data[i]) || isspace(data[i]) || iscntrl(data[i])))
 			printf("%02xh", data[i]);
-		printf("%c", data[i]);
+		putchar(data[i]);
 
 		if (data[i] == '\n')
 			need_eol = 1;
@@ -37,10 +37,10 @@ uint8_t __SIM800C_USER_UartRX(uint8_t* data, uint16_t lth, uint32_t timeout)
 		need_eol = 0;
 		printf("\n<");
 	}
-	if (lth > 2)
-		scanf("%.*s", lth-2, data);
-	else
-		memcpy("\r\n", data, lth);
+	for(uint8_t i = 0; i < lth && data[i] != 27; i++)
+	{
+		data[i] = getchar();
+	}
 	return SIM800C_OK;
 }
 

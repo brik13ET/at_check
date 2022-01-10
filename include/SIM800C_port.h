@@ -2,6 +2,8 @@
 #define SIM800C_SIM800C_PORT_H_
 
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 
 void __SIM800C_USER_UartTX

@@ -1,0 +1,47 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc.exe сборка активного файла",
+			"command": "D:\\mingw\\mingw64\\bin\\gcc.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-I./include"
+			],
+			"options": {
+				"cwd": "D:\\mingw\\mingw64\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "компилятор: D:\\mingw\\mingw64\\bin\\gcc.exe"
+		},
+		{
+			"type": "makefile",
+			"label": "Run GNU Make",
+			"command": "D:\\mingw\\mingw64\\bin\\mingw32-make.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-I./include"
+			],
+			"options": {
+				"cwd": "D:\\mingw\\mingw64\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "компилятор: D:\\mingw\\mingw64\\bin\\gcc.exe"
+		}
+	]
+}
